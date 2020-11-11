@@ -54,8 +54,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   Icon(Icons.access_time),
                   SizedBox(width: 20),
-                  Text(
-                    'You have pushed the button this many times:',
+                  Flexible(
+                    flex: 1,
+                    child: RichText(
+                      text: TextSpan(
+                          style: Theme.of(context).textTheme.bodyText1,
+                          text: 'You have pushed the button this many times:',
+                          children: [
+                            TextSpan(
+                              text: ' $_counter',
+                            ),
+                          ]),
+                    ),
                   ),
                 ],
               ),
