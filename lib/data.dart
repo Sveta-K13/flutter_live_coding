@@ -70,13 +70,13 @@ const String chip_health = "Забота о себе";
 const String chip_science = "Наука";
 
 // icons paths
-const ic_close = 'assets/ic_close.svg';
-const ic_disclosure = 'assets/ic_disclosure.svg';
-const ic_exit = 'assets/ic_exit.svg';
-const ic_info = 'assets/ic_info.svg';
-const ic_limit = 'assets/ic_limit.svg';
+const ic_close = 'assets/ic_close.png';
+const ic_disclosure = 'assets/ic_disclosure.png';
+const ic_exit = 'assets/ic_exit.png';
+const ic_info = 'assets/ic_info.png';
+const ic_limit = 'assets/ic_limit.png';
 const ic_operation_prime = 'assets/ic_operation_prime.png';
-const ic_operation_transaction = 'assets/ic_operation_transaction.svg';
-const ic_transfer = 'assets/ic_transfer.svg';
+const ic_operation_transaction = 'assets/ic_operation_transaction.png';
+const ic_transfer = 'assets/ic_transfer.png';
 
 const me_photo = 'assets/me.jpeg';

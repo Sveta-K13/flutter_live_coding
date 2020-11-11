@@ -1,6 +1,5 @@
 import 'package:declarative_ui_demo/data.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import 'models/item.dart';
 
@@ -43,7 +42,6 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Container(
-        height: double.infinity,
         child: Column(
           children: [
             iconPanel,
@@ -57,25 +55,52 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget get iconPanel {
     return Container(
       height: 150,
+      width: 500,
       child: ListView(
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
           children: [
-            SvgPicture.asset(ic_close, semanticsLabel: 'close'),
-            SvgPicture.asset(ic_disclosure, semanticsLabel: 'disclosure'),
-            SvgPicture.asset(ic_exit, semanticsLabel: 'exit'),
-            SvgPicture.asset(ic_info, semanticsLabel: 'info'),
-            SvgPicture.asset(ic_limit, semanticsLabel: 'limit'),
-            FittedBox(
-              fit: BoxFit.scaleDown,
-              child: Image.asset(
-                ic_operation_prime,
-                semanticLabel: 'prime operation',
-              ),
+            Image.asset(
+              ic_close,
+              semanticLabel: 'close',
+              width: 20,
             ),
-            SvgPicture.asset(ic_operation_transaction,
-                semanticsLabel: 'transaction operation'),
-            SvgPicture.asset(ic_transfer, semanticsLabel: 'transfer'),
+            Image.asset(
+              ic_disclosure,
+              key: Key('jhgbhb2'),
+              semanticLabel: 'disclosure',
+              width: 20,
+            ),
+            Image.asset(
+              ic_exit,
+              semanticLabel: 'exit',
+              width: 20,
+            ),
+            Image.asset(
+              ic_info,
+              semanticLabel: 'info',
+              width: 20,
+            ),
+            Image.asset(
+              ic_limit,
+              semanticLabel: 'limit',
+              width: 20,
+            ),
+            Image.asset(
+              ic_operation_prime,
+              semanticLabel: 'prime operation',
+              width: 20,
+            ),
+            Image.asset(
+              ic_operation_transaction,
+              semanticLabel: 'transaction operation',
+              width: 20,
+            ),
+            Image.asset(
+              ic_transfer,
+              semanticLabel: 'transfer',
+              width: 20,
+            ),
             Image.asset(
               me_photo,
               semanticLabel: 'Sveta',
