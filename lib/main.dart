@@ -16,10 +16,22 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         textTheme: TextTheme(
-            headline5: TextStyle(
-          color: Colors.green,
-          fontSize: 25,
-        )),
+          headline5: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          ),
+          headline6: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.normal,
+            fontSize: 16,
+          ),
+          bodyText1: TextStyle(
+            fontSize: 14,
+            color: Color.fromRGBO(0, 0, 0, 0.55),
+            letterSpacing: -0.33,
+          ),
+        ),
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -37,17 +49,148 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+          appBar: AppBar(
+            toolbarHeight: 250,
+            backgroundColor: Colors.white,
+            title: DecoratedBox(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(38),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      offset: Offset(0, 8),
+                      blurRadius: 16,
+                      spreadRadius: 0,
+                    )
+                  ]),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(38),
+                child: Image.asset(
+                  me_photo,
+                  semanticLabel: 'Sveta',
+                  width: 150,
+                  fit: BoxFit.contain,
+                ),
+              ),
+            ),
+            bottom: TabBar(
+              unselectedLabelColor: Color.fromRGBO(0, 0, 0, 0.55),
+              labelColor: Colors.black,
+              indicatorColor: Color.fromRGBO(6, 132, 65, 1),
+              tabs: [
+                Tab(text: 'Профиль'),
+                Tab(text: 'Настройки'),
+              ],
+            ),
+          ),
+          body: TabBarView(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  children: [
+                    profileBlock,
+                    // tarifBlock,
+                    // interestBlock,
+                  ],
+                ),
+              ),
+              iconPanel,
+            ],
+          )),
+    );
+  }
+
+  Widget get profileBlock {
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            profile_title,
+            style: Theme.of(context).textTheme.headline5,
+          ),
+          Text(
+            profile_description,
+            style: Theme.of(context).textTheme.bodyText1,
+          ),
+          Container(
+            height: 130,
+            child: ListView.separated(
+              separatorBuilder: (context, index) => SizedBox(
+                width: 8,
+              ),
+              scrollDirection: Axis.horizontal,
+              itemCount: bankItems.length,
+              itemBuilder: (context, i) => buildBankItem(bankItems[i]),
+            ),
+          )
+        ],
       ),
-      body: Container(
-        child: Column(
-          children: [
-            iconPanel,
-            Flexible(child: listWidget),
-          ],
-        ),
+    );
+  }
+
+  Widget buildBankItem(Item item) {
+    return Container(
+      height: 130,
+      width: 230,
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(12)),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              item.type == ItemType.PRIME
+                  ? Image.asset(ic_operation_prime)
+                  : Image.asset(ic_operation_transaction),
+              SizedBox(width: 12),
+              Text(item.title, style: Theme.of(context).textTheme.headline6),
+            ],
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                item.subtitle,
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.black,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+              Text(
+                item.description,
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.black.withOpacity(0.55),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget get tarifBlock {
+    return Container(
+      child: Column(
+        children: [],
+      ),
+    );
+  }
+
+  Widget get interestBlock {
+    return Container(
+      child: Column(
+        children: [],
       ),
     );
   }
