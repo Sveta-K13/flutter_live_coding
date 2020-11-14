@@ -62,6 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
       length: 2,
       child: Scaffold(
           appBar: AppBar(
+            centerTitle: true,
             toolbarHeight: 300,
             backgroundColor: Colors.white,
             leading: Align(
