@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:declarative_ui_demo/data.dart';
 import 'package:flutter/material.dart';
 
@@ -16,10 +18,17 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         textTheme: TextTheme(
+          headline4: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.w700,
+            fontSize: 24,
+            height: 32 / 24,
+          ),
           headline5: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
             fontSize: 20,
+            height: 24 / 20,
           ),
           headline6: TextStyle(
             color: Colors.black,
@@ -53,29 +62,62 @@ class _MyHomePageState extends State<MyHomePage> {
       length: 2,
       child: Scaffold(
           appBar: AppBar(
-            toolbarHeight: 250,
+            toolbarHeight: 300,
             backgroundColor: Colors.white,
-            title: DecoratedBox(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(38),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black26,
-                      offset: Offset(0, 8),
-                      blurRadius: 16,
-                      spreadRadius: 0,
-                    )
-                  ]),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(38),
-                child: Image.asset(
-                  me_photo,
-                  semanticLabel: 'Sveta',
-                  width: 150,
-                  fit: BoxFit.contain,
+            leading: Align(
+              alignment: Alignment.topCenter,
+              child: IconButton(
+                onPressed: () {},
+                icon: Image.asset(
+                  ic_close,
+                  semanticLabel: 'close',
+                  width: 20,
                 ),
               ),
             ),
+            title: Column(
+              children: [
+                DecoratedBox(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(38),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black26,
+                          offset: Offset(0, 8),
+                          blurRadius: 16,
+                          spreadRadius: 0,
+                        )
+                      ]),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(38),
+                    child: Image.asset(
+                      me_photo,
+                      semanticLabel: 'Sveta',
+                      width: 150,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 36),
+                Text(
+                  profile_name_me,
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+              ],
+            ),
+            actions: [
+              Align(
+                alignment: Alignment.topLeft,
+                child: IconButton(
+                  onPressed: () {},
+                  icon: Image.asset(
+                    ic_exit,
+                    semanticLabel: 'exit',
+                    width: 20,
+                  ),
+                ),
+              ),
+            ],
             bottom: TabBar(
               unselectedLabelColor: Color.fromRGBO(0, 0, 0, 0.55),
               labelColor: Colors.black,
@@ -88,14 +130,19 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           body: TabBarView(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  children: [
-                    profileBlock,
-                    // tarifBlock,
-                    // interestBlock,
-                  ],
+              SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      profileBlock,
+                      SizedBox(height: 46),
+                      ...tarifBlock,
+                      SizedBox(height: 46),
+                      ...interestBlock,
+                    ],
+                  ),
                 ),
               ),
               iconPanel,
@@ -179,20 +226,159 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget get tarifBlock {
-    return Container(
-      child: Column(
-        children: [],
+  List<Widget> get tarifBlock {
+    return [
+      Text(
+        profile_rates_settings_title,
+        style: Theme.of(context).textTheme.headline5,
       ),
-    );
+      Text(
+        profile_rates_settings_description,
+        style: Theme.of(context).textTheme.bodyText1,
+      ),
+      FlatButton(
+        onPressed: () {},
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Image.asset(
+              ic_limit,
+              semanticLabel: 'limit',
+              width: 40,
+            ),
+            SizedBox(width: 10),
+            Flexible(
+              flex: 1,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      limit_title,
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                    Text(
+                      limit_description,
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
+                  ]),
+            ),
+            Image.asset(
+              ic_disclosure,
+              semanticLabel: 'disclosure',
+              width: 40,
+            ),
+          ],
+        ),
+      ),
+      Divider(
+        indent: 64,
+        height: 12,
+      ),
+      FlatButton(
+        onPressed: () {},
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Image.asset(
+              ic_transfer,
+              semanticLabel: 'transfer',
+              width: 40,
+            ),
+            SizedBox(width: 10),
+            Flexible(
+              flex: 1,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      transfer_title,
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                    Text(
+                      transfer_description,
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
+                  ]),
+            ),
+            Image.asset(
+              ic_disclosure,
+              semanticLabel: 'disclosure',
+              width: 40,
+            ),
+          ],
+        ),
+      ),
+      Divider(
+        indent: 64,
+        height: 12,
+      ),
+      FlatButton(
+        onPressed: () {},
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Image.asset(
+              ic_info,
+              semanticLabel: 'info',
+              width: 40,
+            ),
+            SizedBox(width: 10),
+            Flexible(
+              flex: 1,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      info_title,
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                  ]),
+            ),
+            Image.asset(
+              ic_disclosure,
+              semanticLabel: 'disclosure',
+              width: 40,
+            ),
+          ],
+        ),
+      ),
+    ];
   }
 
-  Widget get interestBlock {
-    return Container(
-      child: Column(
-        children: [],
+  List<Widget> get interestBlock {
+    return [
+      Text(
+        interests_title,
+        style: Theme.of(context).textTheme.headline5,
       ),
-    );
+      Text(
+        interests_description,
+        style: Theme.of(context).textTheme.bodyText1,
+      ),
+      Wrap(spacing: 8, children: [
+        Chip(
+          label: Text(chip_food),
+        ),
+        Chip(
+          label: Text(chip_self_improvement),
+        ),
+        Chip(
+          label: Text(chip_technologies),
+        ),
+        Chip(
+          label: Text(chip_home),
+        ),
+        Chip(
+          label: Text(chip_leisure),
+        ),
+        Chip(
+          label: Text(chip_health),
+        ),
+        Chip(
+          label: Text(chip_science),
+        ),
+      ])
+    ];
   }
 
   Widget get iconPanel {
